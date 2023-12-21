@@ -2,15 +2,69 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+
+  //Set the date before calling timer so there's no delay before it appears
   var currentEl = $("#currentDay")
   var currentTime = dayjs().format('MMM DD, YYYY hh:mm:ss a');
+  
+  
   currentEl.text(currentTime);
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+
+  //start timer
+  setInterval(clock, 1000);
+
+  //call the updateBlock function, which sets the colors of each block.
+  updateBlockClass();
+  
+  //fill in each block with local storage content
+  populateBlocksOnLoad();
+
+
+  function populateBlocksOnLoad(){
+    $(".description9").val(localStorage.getItem(9));
+    $(".description10").val(localStorage.getItem(10));
+    $(".description11").val(localStorage.getItem(11));
+    $(".description12").val(localStorage.getItem(12));
+    $(".description13").val(localStorage.getItem(13));
+    $(".description14").val(localStorage.getItem(14));
+    $(".description15").val(localStorage.getItem(15));
+    $(".description16").val(localStorage.getItem(16));
+    $(".description17").val(localStorage.getItem(17));
+  }
+  
+  //saveBtn commits data to localStorage
+  //I don't know if it's part of the assignment 
+  //for one save button to save one block, but it 
+  //seems easier for a user to only save once, so
+  //save button saves all time blocks.
+  $(".saveBtn").on("click",function(){
+    var update9 = $(".description9").val();
+    localStorage.setItem("9", update9);
+
+    var update10 = $(".description10").val();
+    localStorage.setItem("10", update10);
+
+    var update11 = $(".description11").val();
+    localStorage.setItem("11", update11);
+
+    var update12 = $(".description12").val();
+    localStorage.setItem("12", update12);
+
+    var update13 = $(".description13").val();
+    localStorage.setItem("13", update13);
+
+    var update14 = $(".description14").val();
+    localStorage.setItem("14", update14);
+
+    var update15 = $(".description15").val();
+    localStorage.setItem("15", update15);
+    
+    var update16 = $(".description16").val();
+    localStorage.setItem("16", update16);
+    
+    var update17 = $(".description17").val();
+    localStorage.setItem("17", update17);
+  });
   
 
   //This takes each time block and calls the timeCheck function, which returns a string to update the class of each time block.
@@ -25,11 +79,6 @@ $(function () {
     $("#hour-16").attr("class",timeCheck(16));
     $("#hour-17").attr("class",timeCheck(17));
   }
-
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
   
   //This checks for the time and adjusts each timeblock accordingly.
   function timeCheck(hour){
@@ -48,18 +97,13 @@ $(function () {
    alert(time);
   }
 
-
-
-
-
   // TODO: Add code to display the current date in the header of the page.
- function clock(){
+  function clock(){
   currentTime = dayjs().format('MMM DD, YYYY hh:mm:ss a');
   currentEl.text(currentTime);
   updateBlockClass(); //call this function so that if a user is on during an hour change, the UI updates.
  } 
 
  
- updateBlockClass();
- setInterval(clock, 1000);
+
 });
