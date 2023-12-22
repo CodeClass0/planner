@@ -6,7 +6,7 @@ $(function () {
   //Set the date before calling timer so there's no delay before it appears
   var currentEl = $("#currentDay")
   var currentTime = dayjs().format('MMM DD, YYYY hh:mm:ss a');
-  
+  $(".alert").hide();
   
   currentEl.text(currentTime);
 
@@ -64,6 +64,13 @@ $(function () {
     
     var update17 = $(".description17").val();
     localStorage.setItem("17", update17);
+
+    $(".alert-heading").text("Calendar last updated at " + dayjs().format("hh:mm:ss a"));
+    $(".alert").fadeTo(2500, 500).slideUp(500, function(){
+      $(".alert").slideUp(500);
+  });
+
+    
   });
   
 
@@ -97,13 +104,10 @@ $(function () {
    alert(time);
   }
 
-  // TODO: Add code to display the current date in the header of the page.
+
   function clock(){
-  currentTime = dayjs().format('MMM DD, YYYY hh:mm:ss a');
-  currentEl.text(currentTime);
-  updateBlockClass(); //call this function so that if a user is on during an hour change, the UI updates.
- } 
-
- 
-
+    currentTime = dayjs().format('MMM DD, YYYY hh:mm:ss a');
+    currentEl.text(currentTime);
+    updateBlockClass(); //call this function so that if a user is on during an hour change, the UI updates.
+  } 
 });
